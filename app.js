@@ -8,7 +8,7 @@ var io = require("socket.io")(server);
 
 app.use(express.json());
 
-io.on("Connection", (socket) => {
+io.on("connection", (socket) => {
     console.log("Connected");
 });
 
