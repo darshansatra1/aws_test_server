@@ -54,6 +54,6 @@ io.on('connection', function (client) {
     })
 });
 
-server.listen(port, () => {
+http.listen(port, () => {
     console.log(`Server started on Port ${port}`);
 });
