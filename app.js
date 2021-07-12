@@ -8,13 +8,13 @@ var io = require("socket.io")(server, { cors: { origin: "*" } });
 
 app.use(express.json());
 
-io.on("connection", (socket) => {
-    console.log("Connected");
-});
 
 app.get("/", (req, res) => {
     console.log("CONNECTED");
     res.send("");
+});
+io.on("connection", (socket) => {
+    console.log("Connected");
 });
 
 server.listen(port, () => {
