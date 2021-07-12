@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 io.on('connection', function (client) {
 
     console.log('client connect...', client.id);
-    //io.emit('message',125);
+    io.emit('message', 125);
     client.on('typing', function name(data) {
         console.log(data);
         io.emit('typing', data)
@@ -41,6 +41,7 @@ io.on('connection', function (client) {
     })
 
     client.on('connect', function () {
+        io.emit('message', 125);
     })
 
     client.on('disconnect', function () {
