@@ -4,7 +4,7 @@ var http = require("http");
 const port = process.env.PORT || 3000;
 
 var server = http.createServer(app);
-var io = require("socket.io")(server);
+var io = require("socket.io")(server, { cors: { origin: "*" } });
 
 app.use(express.json());
 
