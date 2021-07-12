@@ -1,25 +1,15 @@
-const express = require("express");
-const app = express();
-// var http = require("http");
-const port = process.env.PORT || 3020;
-
-// var server = http.createServer(app);
-// var io = require("socket.io")(server, { cors: { origin: "*" } });
-
+const app = require('express')();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
-app.use(express.json());
-
-
-app.get("/", (req, res) => {
-    console.log("CONNECTED");
-    res.send("");
+app.get('/', function (req, res) {
+    res.send('Hi');
 });
+
 io.on('connection', function (client) {
 
     console.log('client connect...', client.id);
-    io.emit('message', 125);
+    //io.emit('message',125);
     client.on('typing', function name(data) {
         console.log(data);
         io.emit('typing', data)
@@ -27,12 +17,7 @@ io.on('connection', function (client) {
 
     client.on('message', function name(data) {
         console.log(data);
-        io.emit('message', data);
-    })
-
-    client.on('messageJS', function name(data) {
-        console.log(data);
-        io.emit('messageJS', data);
+        io.emit('message', data)
     })
 
     client.on('location', function name(data) {
@@ -41,7 +26,6 @@ io.on('connection', function (client) {
     })
 
     client.on('connect', function () {
-        io.emit('message', 125);
     })
 
     client.on('disconnect', function () {
@@ -55,6 +39,69 @@ io.on('connection', function (client) {
     })
 });
 
-http.listen(port, () => {
-    console.log(`Server started on Port ${port}`);
+var server_port = process.env.PORT || 3020;
+http.listen(server_port, function (err) {
+    if (err) throw err
+    console.log('Listening on port %d', server_port);
 });
+// const express = require("express");
+// const app = express();
+// // var http = require("http");
+// const port = process.env.PORT || 3020;
+
+// // var server = http.createServer(app);
+// // var io = require("socket.io")(server, { cors: { origin: "*" } });
+
+// const http = require('http').Server(app);
+// const io = require('socket.io')(http);
+
+
+// app.use(express.json());
+
+// app.get("/", (req, res) => {
+//     console.log("CONNECTED");
+//     res.send("");
+// });
+
+// io.on('connection', function (client) {
+
+//     console.log('client connect...', client.id);
+//     io.emit('message', 125);
+//     client.on('typing', function name(data) {
+//         console.log(data);
+//         io.emit('typing', data)
+//     })
+
+//     client.on('message', function name(data) {
+//         console.log(data);
+//         io.emit('message', data);
+//     })
+
+//     client.on('messageJS', function name(data) {
+//         console.log(data);
+//         io.emit('messageJS', data);
+//     })
+
+//     client.on('location', function name(data) {
+//         console.log(data);
+//         io.emit('location', data);
+//     })
+
+//     client.on('connect', function () {
+//         io.emit('message', 125);
+//     })
+
+//     client.on('disconnect', function () {
+//         console.log('client disconnect...', client.id)
+//         // handleDisconnect()
+//     })
+
+//     client.on('error', function (err) {
+//         console.log('received error from client:', client.id)
+//         console.log(err)
+//     })
+// });
+
+// http.listen(port, () => {
+//     console.log(`Server started on Port ${port}`);
+// });
