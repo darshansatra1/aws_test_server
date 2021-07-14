@@ -2,10 +2,10 @@ const app = require('express')();
 const server = require('http').createServer()
 const io = require('socket.io')(server)
 
-// app.get("/", (req, res) => {
-//     console.log("GET");
-//     res.send("HI");
-// });
+app.get("/", (req, res) => {
+    console.log("GET");
+    res.send("HI");
+});
 
 io.on('connection', function (client) {
 
